@@ -1,0 +1,35 @@
+# gitignore
+
+# autoconf files
+/config.h
+/aclocal.m4
+/compile
+/config.h.in
+/config.log
+/config.status
+/configure
+/depcomp
+/install-sh
+/missing
+/stamp-h1
+/autom4te.cache
+/config.guess
+/config.sub
+/libtool
+/ltmain.sh
+
+Makefile
+Makefile.in
+.deps
+.libs
+
+# generated objects and libraries
+*.o
+*.lo
+*.a
+*.la
+*.so
+
+# binaries
+src/jam
+src/testjam

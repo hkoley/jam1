@@ -1,0 +1,611 @@
+JAM:update note
+
+jam1.9092 2022/3/23
+new option mstc(131)=2 is added
+
+jam1.9091 2022/3/22
+bug fix: there was a bug in which code stops without any error message.
+new option for nuclear cluster formation mstc(131)=2
+
+jam1.9090 2022/3/7
+bug fix:
+jamfrg error for attrad
+jamhard
+jamcluster wrong particle code for nucleus
+
+jam1.90810 2022/2/13
+nuclear cluster formation added: subr. jamcluster
+relevant switches:
+mstc(131)=1  ! cluster on
+mstc(132)=1  ! delete dead particle
+parc(131)=4.0fm     ! min. distance
+parc(132)=0.3GeV/c  ! min. relative momentum
+k(2,i)=\pm 10SZZZAAAI  : PDG nuclear code
+k(3,i)=number of Lambda
+k(4,i)=number of Sigma
+k(5,i)=number of Xi
+k(6,i)=number of Omega
+
+
+jam1.90800 2022/2/12
+bug fix introduced in jam1.90589 when mstc(128)=1
+Do not use jam version 1.90589-1.90702
+
+jam1.90701 2022/1/21
+Bug fix in the manual jam.tex mstc(106)=204-212
+
+jam1.90700 2021/10/5
+jamboost modified such that nucleus z-separation is always the same to compute
+event-averaged density.
+
+jam1.90600 2021/8/3
+added new EoS parameter set for RQMDs and RQMDv mode.
+
+jam1.90598 2021/5/12
+bug fix in jamrqmd4.f (RQMDv mode)
+
+jam1.90597 2021/1/15
+lepton decays from hadronic resonance are included.
+
+jam1.90595 2020/10/31
+bug fix: mstc(125) still had a bug....
+
+jam1.90595 2020/10/23
+bug fix:
+new switch mstc(125) to change the strength of potential for strangeness
+baryons by 'parc(108) and parc(109)'.
+
+jam1.90594 2020/10/17
+new switch mstc(125) to change the strength of potential for strangeness
+baryons by parc(107) and parc(108).
+
+jam1.905786 2020/1/26
+RQMD.RMF with momentum-dependent potential added more mstc(106)=207-210
+mstc(128) and parc(128) are introduced for the option that
+pre-hadron scattering is forced to be a diffractive scattering
+which affect the stopping power of baryons as well as the multiplicity
+of produced hadrons.
+
+jam1.905785 2020/1/12
+RQMD.RMF with momentum-dependent potential added more mstc(106)=200-206
+NS1, NS2, NS3 were renewed by changing the mass parameters Mnucl=0.939,
+Msigma=0.55, Momega=0.783. mstc(106)=150,151,152.
+Bug fix in subroutine jamvpotdot5
+mstc(52)=5 -> mstc(52)=2
+
+jam1.90578 2019/12/30
+mstc(119)=2 is implemented where time derivative of vector potential
+is obtained numerically instead of analytical evolution (do not use).
+Note that the meaning of mstc(119) has been changed.
+
+jam1.90578 2019/12/16
+RQMD.RMF with momentum-dependent potential added mstc(106)=200-203
+
+jam1.90575 2019/7/26
+mstc(91)  pare(54), pare(55)
+
+jam1.90574 2019/5/26
+2019/5/24 new option: if mstc(108)=3, New implementation of
+the Skyrme potential as m* = m + V, instead of the original RQMD
+implementation as e* = sqrt(p**2+m**2 +2mV)
+2019/5/26 mstc(108)=4 new implementation of skyrme vector potential:
+vector potential V^mu is fully included.
+
+jam1.905737 2019/4/2
+2018/11/19  option mstc(113)=0: fully non-relativistic treatment of
+potentials: augment of potentials is normal relative distance,
+instead of the distance in the two body c.m..
+2018/11/23 Ground sate nucleus is corrected for the QMD mode, since
+QMD assumes the Gaussian wave packet, usual Woods-Saxon distribution
+yields an unrealistic ground state for the QMD mode. See mstc(98).
+2018/11/24 mstc(99)->mstc(97)
+Yukawa potential is included mstc(99)=1. Parameters are parc(98),parc(99).
+2018/12/8 Nuclear ground state are revised. In QMD mode with the Gaussian
+width parameter L=1.0 fm^2 (L=parc(15)), mstc(98)=4 parc(20)=0.03
+parc(13)=parc(14)=0.9 is found to give a good initial condition 
+for Au and Pb nuclei. For cascade mode and QMD mode with L=0.5 fm^2,
+mstc(98)=1 works which are taken from GLISSANDO.
+Smoth probability of the two-body collision is introduced (mstc(19)=1).
+parc(39)=1.0 controls the probability.
+mstc(19)=0 uses the previous hard-sphere model, i.e. geometrical
+interpretation of the cross sections.
+2018/12/9 So far proton is assigned from 1 to the number of protons
+in the particle list. This causes the unphysical correlations when
+hard core is imposed in the sampling as pointed out by A. Ono.
+We now assign protons and neutrons randomly.
+2018/12/17 use "implicit none" in jamrqmd.f
+2018/12/27 option mstc(114)=5
+2018/12/28 option mstc(113)=2: the argument of the potential is the distance
+in the $j$-th particle rest frame.
+2019/2/14 scalar-vector potential implementation of Skyrme potential
+mstc(108)=1 (But Do not use it)
+2019/3/7 scalar-vector potential of sigma-omega model mstc(108)=2.
+see also mstc(106) for the different EoS.
+Now vector potential V^\mu is fully included.
+2019/4/2 new option: if mstc(7)>1, collision list are updated every
+mstc(7) time step instead of update at each time step.
+
+
+
+jam1.9056 2018/11/12
+Implementation of the real-time particleization:
+particles are continuously emitted at each time step of fluid evolution,
+instead of freeze-out at the end of the fluid evolution.
+mstc(144)=1: isochronous freeze-out at the end of the simulation
+mstc(144)=2: isoenergy density freeze-out at the end of the simulation
+mstc(144)=11: real-time emission
+mstc(144)=12: real-time emission of particle by the Cooper-Frye
+
+jam1.9055 2018/11/10
+Sometimes no particles are generated such as peripheral collisions
+when very small part of the system becomes fluid. In this case, 
+one particle is force to be generated.
+
+jam1.9054
+2018/10/27 dimension of mste(50) and pare(50) is changed to mste(100), pare(100)
+in jam2.inc
+implement momentum dependent potential in the Cooper-Frye formula.
+
+jam1.9053 2018/10/19
+large EoS table: energy density 10GeV/fm^3 -> 20GeV/fm^3
+jameos.inc : maxe=500 -> maxe=1000
+If you need to use old table, change "maxe" in jameos.inc
+Potential is included in the baryon chemical potential mu_B:
+(muB' = muB - V) in the new EoS table.
+
+jam1.9052 2018/9/16
+1) new option for the fluidzation energy deensity parc(144),
+whihc takes into account the fact that minumum allowd energy density
+increases at finite baryon density.
+If parc(144)<0, baryon density dependent fluidzaiton energy density e_f
+is used: e_f = abs(parc(144))+edminQGP(n_B), where n_B is the baryon density,
+and edmin() is the miniumum energy density of QGP (Bag model).
+
+jam1.9042
+bug fix n jamcoll.F  
+call jamdens(icon,ind,cc,rho,rhob,einv,u,1)
+-> call jamdens(icon,ind,cc,rhop,rhobar,einv,u,1)
+
+jam1.9051
+2018/9/14 Hydro+QMD model (EoS tables need to be updated for QMD EoS)
+so do not use this model now. hydro+QMD model now is for preliminary study.
+
+jam1.9041
+2018/9/10 bug fix in p2fluid
+
+jam1.904 
+2018/8/5  implement Coulomb potential in RQMD/S mode.  Switch stc(101)=1
+2018/8/17 implement symmetry energy potential in RQMD/S mode. Switch stc(100)=1
+
+jam1.90
+JAM+hydro dynamical coupling
+
+jam1.820
+sub. jamcmbs0 bug fix parc(63)->parc(62)
+
+jam1.819
+
+1.818 2) was not correct, so it takes it back.
+
+jam1.818
+1) jamhijin: pointed by S. Abe: stop for k+ induced reaction at Elab=100GeV.
+Avoid calling pythia initialization in case of meson-baryon
+collision, since its hard scattering has not been implemented yet.
+
+2) 2017/12/23 in the case of BB collision only option; mstc(51)=0,
+baryons have full cross section to generate Gauber type
+initial multiple collision during the passage of two nuclei.
+
+3) 2017/12/28
+put reading file of EoS into jaminit instead of doing in the main file.
+4) 2018/1/13
+Added initialization of rho and rhob in subroutine jamtensor
+      rho=0d0
+      rhob=0d0
+
+
+jam1.817 Dec 4  2017
+Bug fix in jameos.f
+Interpolation of EoS table has a small discontinuity 
+ie=int((e-emin)/de)
+In the case of high energy density above the table,
+variable "b" was modified by the bag constant.
+B = -> Bag =
+
+jam1.816 Aug 24  2017
+new switch mstc(34) added  mstc(34)=1:interaction of predicted spectator
+part is off.
+
+
+jam1.815 April 14  2017
+bug fix in jamhit pointed by A. Ono
+when we  set time step, some collisions are missed.
+      if(t01.lt.r(5,i1).and.tcol1.lt.r(5,i1)) then
+
+jam1.8148 April 7  2017
+
+1. subroutine jamdiffs(idiff,srt,kf1,kf2,p1,p2,icon) in jamsoft.f
+      call jamkupda(1,jtp,kf,kc,ks,k6,mstd(29)+1,5)
++     k(5,jtt)=mstd(29)+1  ! bug fix 2017/5/6
+
+2. vertex v(j,i): the last collision or last decay.
+3. collision term revisited again: function jamhit
+since last modification in jam1.8145 did not work when time step
+was used for mstc(52).ne.5.
+
+
+jam1.8145 April 2017
+1. jamrmas2 fixed.
+2. collision term revisited.
+3. vetex v(j,i) stays the same after decay. So v(j,i) is always
+the point of final collision.
+
+jam1.814 March. 30  2017
+1.bug fix regarding a way of generating resonance mass
+in jamrmas1 and jamrmas2 pointed out by A. Ono
+2.collision prescription  has been updated so that
+collision number does not depend on time step for options
+mstc(52)=2,3,4.
+
+jam1.812 Jan. 31  2017
+2017/1/26
+1. create jamexec  which is a static version, 
+since new gfortran seems not to work for dynamic link with libjam.so
+2. introduce mstc(112)=1: free momentum in  potential argument is used
+consistent with the assumption of simplified RQMD model.
+
+
+jam1.811 Jan. 20  2017
+bug fix created in jam1.8xxx somewhere.
+So previous version of jam1.8xxx should not be used.
+2016/1/13 bug fix in function jamrqpb(i)
+bug fix subroutine jamrqmm2(in)
+bug fix subroutine jamrdec
+bug fix in subroutine jamabsrb
+meaning of mstc(109) has been changed:
+matc(109)=0:  potential is introduced as a 0th-component of vector potential
+matc(109)=1:  potential is introduced as a scalar but effective mass is not
+treated explicitly 
+matc(109)=2:  potential is introduced as a scalar and effective mass introduced
+matc(109)=3:  potential is introduced as a scalar and effective mass is
+correctedly computed self-consistently.
+
+new option mstc(172)
+
+jam1.809 Dec. 19  2016
+new option mstc(89)
+
+2016/12/12 bug fix pointed out by A. Ono in pauli blocking
+The factor "cpc" was not multiplied.
+
+jam1.808 Dec. 5  2016
+new option mstc(88)
+
+jam1.807 Aug.  2016
+Eos modified collision term with net-baryon density dependent EoS.
+Both 1st order phase transition and crossover are implemented.
+
+jam1.8 Apr. 2016
+Mean field with phase transition
+
+jam1.7 March 2016
+EoS modified collision term
+
+jam1.625 Oct 2015
+ new options for mstc(59)
+
+jam1.624 Oct 2015
+Introduce repulsive or attractive scattering in the two-body collisions:mstc(59)
+
+jam1.623   Sep 18 2015
+bug fix: in the case of mstc(104)=13 and mstc(106)=5
+
+jam1.622   Sep 12 2015
+bug fix
+      common /potpar/t1,t3,t3f,pmu1,pmu2,vex1,vex2
+
+jam1.62   Sep 2 2015
+ New option for Fermi motion: Fermi motion from nucleon configuration added
+ mstc(51)=3 -> 2
+
+jam1.61   Aug 11 2015
+many bugs fixed in RQMD/S mode
+
+jam1.483   Aug 8 2015
+bug fix in jamrqmd when mstc(109)=2
+
+jam1.48   Jul 11 2015
+bug fix RR->NN again
+
+jam1.46   June 8 2015
+bug fix for RR-> NN reactions  jamcbb1, jamcbb2, jamcbb3
+
+jam1.45   Apr. 17 2015
+New parametrizations by A. Ohinishi (AO2015)
+for nuclear mean field are implemented.
+
+temporal solution to the problem with BBar annihilation 
+when one of them is within a formation time but has const. quark.
+(jam-1.362)
+
+jam1.441   Apr. 8 2015
+modified jamabban() when something is wrong, it returns icon=1
+
+jam1.44    Apr. 8 2015
+change the method of annihilation of antibaryon-baryon collision
+new subroutine jamabbann(srt,pr,kf1,kf2,em01,em02,icon)
+bugifx in subr. jamrmas2(kf1,kf2,kc1,kc2,srt,em1,em2,icon)
+bugfix in jamdec
+Thsee modification was also done in JAM 1.35 and 1.36
+parc(17): (D=0.3) probability for the annihilation into 1 mesonic 
+string in antibaryon-baryon collision if possible.
+parc(18): (D=0.3) probability for the annihilation into 2 mesonic 
+strings in antibaryon-baryon collision if possible.
+parc(19): (D=0.5) probability for the annihilation into 2 mesonic 
+strings plus stable meson in antibaryon-baryon collision if possible.
+
+jam1.43    Feb. 20 2015
+mstc(108) treatment of potential after collision
+mstc(109)=1: potential is included in p^0 in the computation of EoM
+         =2: potential is included in the p(4,i)=sqrt(p**2+m**2+2mV)
+mstc(120) cuda on
+subroutine jamscatm: bug fix pointed by A.Ono 2015/2/5
+
+jam1.41    Jan. 1 2015
+bug fix for new diffractive scattering when mstc(71)=2.
+Energy was not conserved for AA collisions.
+
+jam1.40    December 21 2014
+cuda for RQMD/S 
+
+jam1.32    December 5 2014
+nucleon-nucleon total cross section is obtained by the sum of inelastic cross section plus
+elastic cross section at low energy around  pion threshold
+as pointed by A.Ono. elastic cross section at srt<2.4 for pp/pn is also modified by
+functions given by Cugnon parameterization.
+
+Diffractive scattering from Pythia6 can be used in JAM. mstc(71)=2
+accordingly mstc(74)=1 is default to fit the multiplicity of produced
+particle.
+
+
+jam1.31    November 23 2014
+In 1.19 parc(64) was changed, but it creates more pions.
+We set lower value which is close to the original value:parc(64)=1.1
+mstc(61)=2
+mstc(74)=0 QCD dipole radiation switched off by default
+mstc(198) is changed to mstc(106) and default value is mstc(106)=3
+mstc(199) is changed to mstc(107)=0.
+
+
+jam1.30    November 13 2014
+include QMD evolution part (RQMD/S) by combining the code
+jam1.021d-HK(2005/7/27)
+
+jam1.240   November  9 2014
+new switch mstc(77) pionic fusion cross section
+new switch mstc(78) double pionic fusion cross section
+bug fix  in subroutine jamscatm pointed out by A.Ono
+bug fix in the pp -> deuteron pi cross section
+
+jam1.220   November  6 2014
+bug fix: jamdec.f
+    subroutine jamwidm(kc,kfsp,kfsn,kf1,kf2,emcm,ibranch,pwid,totwid,
+    fixed wrongly set itag=0 in case of Delta
+
+jam1.211   July  4 2014
+Delete unwanted error message in jamfdec.
+
+jam1.210   May  22 2014
+bug fix: jamsoft.f
+      subroutine jamdmass(kf1,kfm,kfd,emin,emdn)
+        else if(kflb.eq.3.and.kflc.eq.3.and.kflb+kflc.lt.6) then
+-->
+        else if((kflb.eq.3.or.kflc.eq.3).and.kflb+kflc.lt.6) then
+
+jam1.200   May  1 2014
+add parc(9) and parc(10) to control decay angle.
+When decaying particle is produced by s-channel reaction,
+we use the axis of projectile direction (isw_axis=0) for decay in
+subroutine jamrdec.
+modified subroutine jamrobo to avoid compiler dependence
+
+
+jam1.190   Feb  19 2014
+Change default parameters
+  parc(64)=1.09 -> parc(64)=1.5
+      parc(71)=10.0d0
+      parc(72)=30.0d0
+
+ take out this line from jamfdec in jamdec.f
+c       if(mstc(42).ne.0.and.k(1,ip).le.1) goto 200
+so that K0 decay alone works by 
+       mdcy(jamcomp(311),1)=1   ! K0
+       mdcy(jamcomp(-311),1)=1  ! aK0
+
+jam1.180   Feb  12 2014
+parc(72) is introdued to ensure smoth transition of models
+as a function of incident energy.
+
+jam1.170   Jan 16 2014
+ subroutine jamdefrm is added to take into account a deformation of nucleus
+ use mstc(90)
+
+jam1.160   May 3 2013
+bug fix by Koichi Murase
+jamcoll.f  1. modified jamhit to avoid infinite loop when three particles
+           will collide at the same point.
+           2. modified jamcfind: introduce random selection in case of
+	   having collisions with the same time.
+
+ Machine dependent routines for XL Fortran/IBM AIX  by K. Murase (xlfortran.f)
+
+
+jam1.150   December. 9 2011
+o added option to output phase space data for each time interval
+  parc(7) when mstc(164)=3.
+o bug fix: analysis of time dependent output is moved before collision.
+
+jam1.142   August. 26 2010
+the bug fix 1) of version1.141 was not fixed.
+
+jam1.141   August. 24 2010
+bug fix pointed out by Prof. Kasahara
+1) in subroutine jaminbm(chfram,chbeam,chtarg,cwin)
+  treatment of cwin e.g. when cwin='         200gev'
+2) jamcross.f:jamxtot undefined variable kfm
+3) jamcoll   undefined variable ist
+4) jamcross  undefined variable sths
+
+  jam1.140   July. 2 2010
+  bug fix: decay of X(1690) kf=13322 or 13312 pointed by T.Hirano
+  pyjet.f and jamdec.f were modified.
+
+  jam1.136   Sep. 18 2009
+bug fix: when maxium impact parameter is greater than 90, it was automatically
+set min. bias collision, which means that the input value of bmax was
+changed inside the code. In this version, this option was eliminated.
+
+  jam1.135   Sep. 18 2009
+  bug fix: beam particle k0, kbar0, n0, pi0, xi0 did not work.
+
+  jam1.134   Sep. 14 2009
+  bug fix: when one use targ='207:112', one got error.
+
+  jam1.133   Aug. 11 2009
+  bug fix: when one wanted to do pA collision, input did not work correctly.
+
+  jam1.132   Mar. 14 2008
+  change gfort.f for gcc4.3
+
+  jam1.13   Oct. 14 2007
+  add gfortran.f for gcc4.
+change jam.f because it did not work with gcc4
+
+  jam1.11   Jan. 21 2007
+bug fix for kaon weak decay after simulation.
+
+  jam1.10   Jan. 19 2007
+   bug fix
+o mstc(42) works.
+o additive quark cross section for meson-meson.
+
+  jam1.09   Jul. 19 2005
+  o bug fix by A. Ohnishi (taken from jam version jam1.02h-HK.).
+Anisotropic resonance decay routine (jamrdec in jamdec.f) is modified
+to avoid artificial generation of v2.
+o bug fix in jamana.f at subroutine jamfile.
+
+
+jam1.08   Apr. 9 2005
+bug fix for mstc(61)=0: option for isotrophic resonance decay
+was not isotropic for delta baryons.
+
+jam1.07   Apr. 4 2005
+bug fix pointed out by A. Ohnishi(Hokudai)
+fnkick() fnkick2()
+
+jam1.06   Oct. 21 2004
+bug fix: mstc(42)=0 option (weak decay after simulation) works now.
+
+jam1.015   Oct. 11 2004
+all pythia subroutine, function and commonblock names are changed.
+
+jam1.014   Oct. 10 2004
+o fname(8) is now used to specify the directory of the output files.
+o some common blcok names and functions which conflict with
+the pythia program have been changed. I will change all subroutine
+names later.
+
+jam1.012   Sep. 16 2003
+ bug fix pointed out by T.Tabaru(RIKEN)
+ for the generation of soft pt kick.  pt kick was generated
+ randomly from the prepared tables, but it was not smooth enough.
+
+jam1.011.00   Jul. 17 2003
+  bug fix in subroutine jamwidm in jamdec.f
+  after version 1.009.28  pointed by Ryotaro Muto (Kyoto)
+  decays were forbiden when resonance pole mass is less than the sum
+  of daughter particles in the case of momentum dependent decay width.
+  For example, a0/f0 -> KK channels.
+
+jam1.010.01   Feb. 23 2002
+bug fix in jamsoft.f, jamhard.f,jamhij.f  pointed out by Tsuguchika TABARU
+  <The result has not been changed in this bug.>
+ The information which contains in indd() was wrong. So one gets
+wrong information in each string decay in the case that one of decay
+products is anit-baryon.  In the case of hard scattering, this
+bug is still not removed. If one wants to know the information
+for each collision and decay, please ignore partons in the
+information. 
+jamhij.f
+    call jamerrm(30,'(hifun:) This number already used'//code)
+--> call jamerrm(30,0,'(hifun:) This number already used'//code)
+
+jam1.010.00   Jan. 04 2002
+bug fix in jamdec.f pointed out by Tsuguchika TABARU
+      totwid1   = totwid / paru(3)
+-->
+      totwid   = totwid / paru(3)
+(older version < jam1.009.24 is ok)
+
+jam1.009.29   Jan. 10 2001
+ bug fix  in jamhij.f at entry vegas2(fxn,avgi,sd,chi2a)
+
+7     continue
+        xi(nd,j)=one
+ --->
+        xi(nd,j)=one
+7     continue
+ 
+
+jam1.009.28   Aug. 31 2000
+ 1. add dummy subroutine jamanaus to be able to analyze something
+    at each collision and decay by users.
+
+jam1.009.27   Apr. 21 2000
+ 1. update particle data: short lived particles do not decay as a default.
+ 2. slight modification of code to handle option 'user'.
+    To know how to use the option frame="user", main program of main_blz.f
+    and mainu.f would be useful.
+ 3. update jam.tex to explain how to use frame='user'.
+
+jam1.009.26   Apr. 2000
+ 1.  Add new option 'user' for input variable frame.  This allows for user
+     specified phase space data for the initial condition of cascading.
+     If frame='user', you have to fill the following common bock.
+      common/jamevnt1/r(5,mxv),p(5,mxv),v(5,mxv),k(11,mxv)
+      common/jamevnt2/nv,nbary,nmeson
+      common/jamjet1/vq(10,mxv),kq(2,mxv)
+
+ 2.  add function  'jamflav' that gives baron number or flavour content
+      of particles.
+ 3.  bug fix: no effect on random number seed when input file is used
+
+
+o jam1009k
+
+11/19, 1999
+1)
+subr. jamcross  (jamcross.f)
+c....Calculate resonance cross sections.
+        emrf=0d0   <---- add
+        if(srt.le.3.0d0)
+     $    call jamxbw2(srt,pr,kf1,kf2,kc1,kc2,iz1,iz2,sigres,emrf,msel)
+
+2)
+ subr. cputime (g77.f, unix.f, sun.f)
+     save  cptime1
+->   save  stime,cptime1
+
+subr.jamcmbs1 (jamcross.f)
+3)      sigr=0d0  added
+
+
+o 1009j: Correct mistakes in jamcmps(jam.f) (Nov.5, 1999).
+           in order to be able to use input file on g77 compiler.
+
+o 1009i: Correct mistakes in JAM manual (Oct.25, 1999).
+
+
+

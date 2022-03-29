@@ -1,0 +1,25 @@
+./configure
+make
+
+If this does not work, specify F77 and FFLAGS
+
+F77=gfortran ./configure --prefix=/home/myname/
+
+or write the following in your .bashrc
+
+export F77="gfortran"
+export FFLAGS="-O3 -g"
+
+then
+
+make
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+This is for developers:
+
+ aclocal
+ automake -a
+ autoconf
+ libtoolize
+
