@@ -4090,7 +4090,6 @@ cxxxxxxxxxxxxxxxxxxxxxxxx
        print *,'1 kf1=',kf1,'kf2=',kf2,'kf01=',kf01,'kf02=',kf02
       print *, 'em1=',em1,'em2=',em2,'em1min=',em1min,'em2min=',em2min
       print *,'iswave=',iswave
-          stop
           kf1=kf01
           kf2=kf02
           em1=em1o
@@ -4108,7 +4107,6 @@ cxxxxxxxxxxxxxxxxxxxxxxxx
       print *,'2 kf1=',kf1,'kf2=',kf2,'kf01=',kf01,'kf02=',kf02
       print *, 'em1=',em1,'em2=',em2,'em1min=',em1min,'em2min=',em2min
       print *,'iswave=',iswave
-         stop
           kf1=kf01
           kf2=kf02
           em1=em1o
