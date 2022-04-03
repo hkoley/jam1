@@ -3279,7 +3279,7 @@ c....convert meson string into hadron
         if(em(i).gt.0.0) then
           em(i)=sqrt(em(i))
         else
-          write(mstc(38),*)'em<0',i,em(i)
+c         write(mstc(38),*)'em<0',i,em(i)
           goto 1000
         endif
 c       qm=pjmass(kfl1(i))+pjmass(kfl2(i))
