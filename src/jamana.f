@@ -2500,6 +2500,8 @@ c...Inelastic.
       if(ichanel.ge.2) then
         mstd(42)=mstd(42)+1
 c...Strangeness source.
+        ks01=kcp(1,1)
+        ks02=kcp(1,2)
         kf1=kcp(2,1)
         kf2=kcp(2,2)
         kf3=kcp(2,3)
