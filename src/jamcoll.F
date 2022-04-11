@@ -3780,15 +3780,17 @@ c....Check energy momentum conservation.
 
 c***********************************************************************
       function eminres(kc1)
-      implicit double precision(a-h, o-z)
+      implicit none
       include 'jam2.inc'
+      integer id,kc1
+      real*8 eminres
 
-        id=kchg(kc1,5)
-        if(id1.eq.id_delt.or.id1.eq.id_nucls.or.id1.eq.id_delts) then
-          eminres = 1.08d0
-        else
-          eminres=pmas(kc1,1)-pmas(kc1,3)
-        endif
+      id=kchg(kc1,5)
+      if(id.eq.id_delt.or.id.eq.id_nucls.or.id.eq.id_delts) then
+        eminres = 1.08d0
+      else
+        eminres=pmas(kc1,1)-pmas(kc1,3)
+      endif
 
       end
 
