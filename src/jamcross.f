@@ -4389,16 +4389,13 @@ c...Resonance prob. from integrated Breit-Wigner.
       em0(2)=em02
 
       call samplemass(iex,kcv,srt,pf0,emr,em0,gam0,emax,emin,jcon)
-c     if(jcon.ne.0) then
-c        print *,'jamrmas1 jcon=',jcon,emr(1),emr(2)
-c     endif
-
-      if(jcon.ne.0) goto 400
+      if(jcon.ne.0) goto 401
  
  300  em1=emr(1)
       em2=emr(2)
       return
 
+401   continue
       itry=0
 400   continue
       itry=itry+1

@@ -36,44 +36,71 @@ c***********************************************************************
       implicit none
       include 'jam1.inc'
       include 'jam2.inc'
-      integer i1,i2,j
-      real*8 pcm1,pcm2,pcm3,pcm4,srt,bex,bey,bez,gam
-      real*8 p1(5),p2(5),r1(5),r2(5),t,rr,pp
+      integer i1,i2
+      real*8 rr,pp
+      real*8 pcm(5),dx(5),dp(5),psq,dxpcm,p1sq,p2sq,dxsq,p2pcm,dxp2,
+     & dxp1,p1pcm,s
 
-      pcm1=p(1,i1)+p(1,i2)
-      pcm2=p(2,i1)+p(2,i2)
-      pcm3=p(3,i1)+p(3,i2)
-      pcm4=p(4,i1)+p(4,i2)
-      srt=sqrt(pcm4**2-pcm1**2-pcm2**2-pcm3**2)
-      bex=pcm1/pcm4
-      bey=pcm2/pcm4
-      bez=pcm3/pcm4
-      gam=pcm4/srt
-      p1(:)=p(:,i1)
-      p2(:)=p(:,i2)
-      r1(:)=r(:,i1)
-      r2(:)=r(:,i2)
-      call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,p1(1),p1(2),p1(3),p1(4))
-      call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,p2(1),p2(2),p2(3),p2(4))
-      call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,r1(1),r1(2),r1(3),r1(4))
-      call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,r2(1),r2(2),r2(3),r2(4))
-      t=max(r1(4),r2(4))
-      r1(4)=t
-      r2(4)=t
-      do j=1,3
-       r1(j)=r1(j)+(t-r1(4))*p1(j)/p1(4)
-       r2(j)=r2(j)+(t-r2(4))*p2(j)/p2(4)
-      end do
-      rr=(r2(1)-r1(1))**2+(r2(2)-r1(2))**2+(r2(3)-r1(3))**2
-      pp=(p2(1)-p1(1))**2+(p2(2)-p1(2))**2+(p2(3)-p1(3))**2
+c     real*8 pcm1,pcm2,pcm3,pcm4,srt,bex,bey,bez,gam,t,
+c    &  p1(5),p2(5),r1(5),r2(5)
+
+      dx(:)=r(:,i1)-r(:,i2)
+      dp(:)=p(:,i1)-p(:,i2)
+      pcm(:)=p(:,i1)+p(:,i2)
+      psq = dp(4)**2 - dp(1)**2 - dp(2)**2 - dp(3)**2
+      s=pcm(4)**2-pcm(1)**2-pcm(2)**2-pcm(3)**2
+      p1sq = p(4,i1)**2 - p(1,i1)**2 - p(2,i1)**2 - p(3,i1)**2
+      p2sq = p(4,i2)**2 - p(1,i2)**2 - p(2,i2)**2 - p(3,i2)**2
+      pp= -psq + (p1sq - p2sq)**2/s
+
+c...distance and clustering time in the computational frame.
+      dxsq = dx(4)**2 - dx(1)**2 - dx(2)**2 - dx(3)**2
+      dxpcm = dx(4)*pcm(4) - dx(1)*pcm(1) - dx(2)*pcm(2) - dx(3)*pcm(3)
+      if(dxpcm.ge.0.0) then
+       p2pcm=p(4,i2)*pcm(4)-p(1,i2)*pcm(1)-p(2,i2)*pcm(2)-p(3,i2)*pcm(3)
+        dxp2=p(4,i2)*dx(4)-p(1,i2)*dx(1)-p(2,i2)*dx(2)-p(3,i2)*dx(3)
+        rr = -dxsq + dxpcm/p2pcm*(2*dxp2 - dxpcm*p2sq/p2pcm);
+        r(5,i1) = r(4,i1)
+        r(5,i2) = p(4,i2)*dxpcm/(p2pcm) + r(4,i2)
+      else
+       p1pcm=p(4,i1)*pcm(4)-p(1,i1)*pcm(1)-p(2,i1)*pcm(2)-p(3,i1)*pcm(3)
+        dxp1=p(4,i1)*dx(4)-p(1,i1)*dx(1)-p(2,i1)*dx(2)-p(3,i1)*dx(3)
+        rr = -dxsq + dxpcm/p1pcm*(2*dxp1 - dxpcm*p1sq/p1pcm);
+        r(5,i1) = -p(4,i1)*dxpcm/p1pcm + r(4,i1)
+        r(5,i2) = r(4,i2)
+      endif
+
+c------------------------------------------------------------------------------
+c     pcm1=p(1,i1)+p(1,i2)
+c     pcm2=p(2,i1)+p(2,i2)
+c     pcm3=p(3,i1)+p(3,i2)
+c     pcm4=p(4,i1)+p(4,i2)
+c     srt=sqrt(pcm4**2-pcm1**2-pcm2**2-pcm3**2)
+c     bex=pcm1/pcm4
+c     bey=pcm2/pcm4
+c     bez=pcm3/pcm4
+c     gam=pcm4/srt
+c     p1(:)=p(:,i1)
+c     p2(:)=p(:,i2)
+c     r1(:)=r(:,i1)
+c     r2(:)=r(:,i2)
+c     call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,p1(1),p1(2),p1(3),p1(4))
+c     call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,p2(1),p2(2),p2(3),p2(4))
+c     call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,r1(1),r1(2),r1(3),r1(4))
+c     call jamrobo(0d0,0d0,-bex,-bey,-bez,gam,r2(1),r2(2),r2(3),r2(4))
+c     t=max(r1(4),r2(4))
+c     r1(:)=r1(:)+(t-r1(4))*p1(:)/p1(4)
+c     r2(:)=r2(:)+(t-r2(4))*p2(:)/p2(4)
+c     rr=(r2(1)-r1(1))**2+(r2(2)-r1(2))**2+(r2(3)-r1(3))**2
+c     pp=(p2(1)-p1(1))**2+(p2(2)-p1(2))**2+(p2(3)-p1(3))**2
 
 c...boost back to the original frame.
-      call jamrobo(0d0,0d0,bex,bey,bez,gam,r1(1),r1(2),r1(3),r1(4))
-      call jamrobo(0d0,0d0,bex,bey,bez,gam,r2(1),r2(2),r2(3),r2(4))
+c     call jamrobo(0d0,0d0,bex,bey,bez,gam,r1(1),r1(2),r1(3),r1(4))
+c     call jamrobo(0d0,0d0,bex,bey,bez,gam,r2(1),r2(2),r2(3),r2(4))
 
 c...clustering time in the computational frame.
-      r(5,i1)=r1(4)
-      r(5,i2)=r2(4)
+c     r(5,i1)=r1(4)
+c     r(5,i2)=r2(4)
 
       end
 
