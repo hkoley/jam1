@@ -14,9 +14,10 @@ then
 
 make
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+If there is no 'configure' do the following and then ./configure
+ autoreconf -i 
 
-This is for developers:
+or
 
  aclocal
  automake -a

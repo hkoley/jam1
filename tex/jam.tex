@@ -2923,9 +2923,14 @@ $Z = n_p$ the total charge and
 $S$ is a total number of strange quarks (not a strangeness number).
 The meaning of some \ttt{k(:,)}s are different:\\
 \ttt{k(3,nv)=} number of $\Lambda$\\
-\ttt{k(4,nv)=} number of $\Sigma$\\
-\ttt{k(5,nv)=} number of $\Xi$\\
-\ttt{k(6,nv)=} number of $\Omega$
+\ttt{k(4,nv)=} number of $\Sigma^-$\\
+\ttt{k(5,nv)=} number of $\Sigma^0$\\
+\ttt{k(6,nv)=} number of $\Sigma^+$\\
+\ttt{k(7,nv)=} number of $\Xi^-$\\
+\ttt{k(8,nv)=} number of $\Xi^0$\\
+\ttt{k(9,nv)=} number of $\Omega$\\
+\ttt{k(10,nv)=} number of neutron\\
+\ttt{k(11,nv)=} number of proton
 
  \begin{subentry}
     \itemt{$=0$ :} No.
@@ -2943,6 +2948,15 @@ The meaning of some \ttt{k(:,)}s are different:\\
  \begin{subentry}
     \itemt{$=0$ :} Particles are not removed.
     \itemt{$=1$ :} Particles are removed from the list after nuclear cluster formation.
+ \end{subentry}
+
+\itemt{mstc(133) :}(D=0) switch for aviding unstable nuclear cluster formation
+ \begin{subentry}
+    \itemt{$=0$ :} No limitation is imposed.
+    \itemt{$=1$ :} nuclear cluster which is far from $\beta$-stable nuclei is
+    remved, which is estimated by the binding energy of the cluster greater
+than the value given by \ttt{parc(133)}. The binding enegy is estimated by
+the Bethe and Weizs\"acker mass formula.
  \end{subentry}
 
 \itemt{mstc(135) :}(D=0) 
@@ -3483,6 +3497,10 @@ when $\ttt(mstc(118)=1$.
 \itemt{parc(132) :} (D=0.3 GeV/$c$) critical separation of relative momentum 
 of two-baryons
  for nuclear cluster formation.
+
+\itemt{parc(133) :} (D=$-7.0$ MeV) binding energy per mass $BE/A$.
+  When the binding energy per mass computed by the Bethe Weiz\"acker mass
+formula is less than $BE/A$, nuclear cluster formation is accepted.
 
 %-----------------------------
 % Hydrodynamics

@@ -766,6 +766,16 @@ c a2              = 18.4107           #       +/- 0.256056
         end
 
 ************************************************************************
+        integer function zbstable(ia)
+************************************************************************
+      implicit none
+      integer ia
+      real*8 ac,ai
+      parameter(ac=0.717d0,ai=28.1d0)
+      zbstable=0.5d0*ia/(1d0+ac/ai*0.25*dble(ia)**(2.0d0/3.0d0))
+      end
+
+************************************************************************
       subroutine qmdpotparam
       implicit none
       real*8 hc,rho0,conv

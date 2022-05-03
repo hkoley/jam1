@@ -1,5 +1,16 @@
 JAM:update note
 
+jam1.9093 2022/5/3
+new option added: mstc(133),parc(133) 
+k(3,i)=number of Lambda
+k(4,i)=number of Sigma-
+k(5,i)=number of Sigma0
+k(6,i)=number of Sigma+
+k(7,i)=number of Xi-
+k(8,i)=number of Xi0
+k(9,i)=number of neutron
+k(10,i)=number of proton
+
 jam1.9092 2022/3/23
 new option mstc(131)=2 is added
 

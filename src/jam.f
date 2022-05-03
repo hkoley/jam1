@@ -280,7 +280,7 @@ c...Update collision counters.
         write(ih,*)'Total mesons     ',nmeson/mstc(5)
       endif
 
-      if(nv.ne.nbary+nmeson) then
+      if(mstc(131).eq.0.and.nv.ne.nbary+nmeson) then
         write(check(1),'(''nv='',i9)')nv
         write(check(2),'(''nbary='',i9)')nbary
         write(check(3),'(''nmeson='',i9)')nmeson

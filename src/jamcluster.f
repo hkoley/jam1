@@ -199,10 +199,11 @@ c...clustering time in the computational frame.
       include 'jam2.inc'
       integer,allocatable :: mscl(:),num(:)
       integer nclust,icheck,i1,i2,i,j,lp,iz,inn,is,il,ix,io,ii,nt
+      integer isp,is0,ism,ix0,ixm
       integer jamcomp,ic,id,kf,kc,jj,j0,istr
       logical unknown,clust
       real*8 rc(5),pc(5),lc(3)
-      real*8 tclust
+      real*8 tclust,beld
       real*8 ptot(5),ptot1(5)
 
       ptot(:)=0.0
@@ -263,6 +264,11 @@ c...Loop over clusters.
         is=0
         ix=0
         io=0
+        isp=0
+        is0=0
+        ism=0
+        ix0=0
+        ixm=0
         istr=0
         unknown=.false.
 c....loop over nucleons in the cluster.
@@ -280,8 +286,20 @@ c....loop over nucleons in the cluster.
           else if(id==id_lamb .or.id==id_lambs) then
             il=il+1
           else if(id==id_sigm .or.id==id_sigms) then
+            if(kchg(kc,1).eq.-3) then
+              ism = ism + 1
+            else if(kchg(kc,1).eq.0) then
+              is0 = is0 + 1
+            else if(kchg(kc,1).eq.3) then
+              isp = isp + 1
+            endif
             is=is+1
           else if(id==id_xi .or.id==id_xis) then
+            if(kchg(kc,1).eq.-3) then
+              ixm = ixm + 1
+            else if(kchg(kc,1).eq.0) then
+              ix0 = ix0 + 1
+            endif
             ix=ix+1
           else if(id==id_omega) then
             io=io+1
@@ -295,6 +313,9 @@ c           print *,'jamcluster unkown id=',kf
         if(unknown) cycle
         if(nt>=3.and.iz==0) cycle
         if(nt>=3.and.inn==0) cycle
+c...check binding energy
+        if(mstc(133).ge.1.and.nt.ge.15
+     & .and.beld(nt,iz).gt.parc(133)*nt) cycle
 
         rc(:)=0.0
         pc(:)=0.0
@@ -326,10 +347,14 @@ c...Find global time for clusterlization.
        k(2,nv)=(1000000000 + nt*10 + iz*10000
      &  + istr*10000000 )*isign(1,kf)
        k(3,nv)=il
-       k(4,nv)=is
-       k(5,nv)=ix
-       k(6,nv)=io
-       k(7,nv)=nt
+       k(4,nv)=ism
+       k(5,nv)=is0
+       k(6,nv)=isp
+       k(7,nv)=ixm
+       k(8,nv)=ix0
+       k(9,nv)=io
+       k(10,nv)=inn
+       k(11,nv)=iz
        r(:,nv)=rc(:)/nt
        p(:,nv)=pc(:)
        p(5,nv)=sqrt(p(4,nv)**2-p(1,nv)**2-p(2,nv)**2-p(3,nv)**2)
@@ -344,8 +369,11 @@ c...Find global time for clusterlization.
       deallocate(mscl)
       deallocate(num)
 
-
-      if(mstc(132).eq.1) call jamedit
+      if(mstc(132).eq.1) then
+c      mste(40)=1
+       call jamedit
+       mste(40)=0
+      endif
 
       ptot1(:)=0.0
       do i=1,nv
