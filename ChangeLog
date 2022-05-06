@@ -1,5 +1,9 @@
 JAM:update note
 
+jam1.9093 2022/5/6
+bug fix in the manual:’100:50’ total mass number 100 and 50 neutrons.
+'neutrons' should be 'protons.'
+
 jam1.9093 2022/5/3
 new option added: mstc(133),parc(133) 
 k(3,i)=number of Lambda
