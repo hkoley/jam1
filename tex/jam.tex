@@ -2890,6 +2890,13 @@ for strange baryons.
     \itemt{$=1$ :} Yes.
  \end{subentry}
 
+\itemt{mstc(126) :}(D=0) Option to change the $\Delta$ decay angular
+distribution specified by the parameter \ttt{parc(125)}.
+ \begin{subentry}
+    \itemt{$=0$ :} specified by \ttt{mstc(61)}.
+    \itemt{$=1$ :} $p$-wave distribution. See \ttt{parc(125)}.
+ \end{subentry}
+
 
 \itemt{mstc(127) :}(D=0) Quatnum-mechanical suppression of very
 soft multiple collisions.
@@ -3134,6 +3141,39 @@ As a default (D=0), nothing is done.
 \itemt{mstc(155):} (D=0) flow $d<Px>/dy$, $d<P_t>/dy$.
 \itemt{mstc(156):} (D=0) invariant energy distribution of two-body collisions.
 \itemt{mstc(157):} (D=0) output sampled ground state.
+\itemt{mstc(158):} (D=5) option for deuteron coalescence.
+ \begin{subentry}
+   \itemt{$=1$ :} phase space coalescence specified by the condition that the
+   phase space distance in the CM frame of the two nucleons is less than the parameters 
+ $|r_1 - r_2|\leq \ttt{parc(151)}$ and $|p_1 - p_2|\leq \ttt{parc(152)}$.
+   \itemt{$=2$ :} Same as the $\ttt{mstc(158)}=1$, but the spin factor of 3/4,
+   which is saved in the vector $\ttt{weid(i)}$ is taken into account. Thus, 
+   you have to multiply this factor for the yield of the deuteron.
+   \itemt{$=3$ :} A deuteron is produced with the probability of the
+transition from $p$ $n$ pair to deuteron ground state
+     $$P= 8\exp(-\bm{r}_{cm}^2/A^2 -\bm{p}_{cm}^2A^2/\hbar^2),$$
+     where $A=\ttt{parc(153)}$, $\bm{r}_{cm}=\bm{r}_{n,cm}-\bm{r}_{p,cm}$, and
+     $\bm{p}_{cm}=\bm{p}_{n,cm}-\bm{p}_{p,cm}$.
+   \itemt{$=4$ :} A deuteron is produced with the probability 
+     $$P= \frac{3}{4}\cdot 8\,\exp(-\bm{r}_{cm}^2/A^2 -\bm{p}_{cm}^2A^2/\hbar^2).$$
+     Isospin factor $3/4$ is taken into account by $\ttt{weid(i)}=3/4$.
+   \itemt{$=5$ :} A deuteron is produced with the probability using Fusimi function
+     $$P= \frac{3}{4}\cdot 8\,\exp(-\bm{r}_{cm}^2/A^2 -\bm{p}_{cm}^2A^2/4\hbar^2).$$
+     Isospin factor $3/4$ is taken into account by $\ttt{weid(i)}=3/4$.
+   \itemt{$=6$ :} A deuteron is produced with the probability using Fusimi function
+     $$P= \frac{1}{2}\cdot\frac{3}{4}\cdot 8\,\exp(-\bm{r}_{cm}^2/A^2 -\bm{p}_{cm}^2A^2/4\hbar^2).$$
+     Spin factor and Isospin factor $3/8$ is taken into account by $\ttt{weid(i)}=3/8$.
+   \itemt{$=7$ :} A deuteron is produced with the probability using Fusimi function
+     $$P= \frac{3}{4}\cdot 8\,\exp(-\bm{r}_{cm}^2/A^2 -\bm{p}_{cm}^2A^2/4\hbar^2).$$
+     $\ttt{weid(i)}=1$.
+   \itemt{$=8$ :} A deuteron is produced with the probability using Fusimi function
+     $$P= \frac{1}{2}\cdot\frac{3}{4}\cdot 
+            \left|\sqrt{2}\cos \left(\frac{1}{2\hbar}\bm{r}_{cm}\cdot\bm{p}_{cm} \right)\right|^2
+            \cdot 8\,\exp(-\bm{r}_{cm}^2/A^2 -\bm{p}_{cm}^2A^2/4\hbar^2).$$
+     $\ttt{weid(i)}=\frac{1}{2}\cdot\frac{3}{4}\cdot 
+            |\sqrt{2}\cos \left(\frac{1}{2\hbar}\bm{r}_{cm}\cdot\bm{p}_{cm} \right)|^2
+     $.
+ \end{subentry}
 
 \medskip
 Time dependent studies:
@@ -3483,6 +3523,10 @@ when $\ttt(mstc(118)=1$.
  if $\ttt{mstc(125)}=1$
  $\mathrm{factor}=\ttt{parc(107)}\cdot|\text{number of strangeness}|$.
 
+\itemt{parc(125):} (D=3.0) Parameter for the $\Delta$ decay angluar
+distribution: $dN/d(\cos\theta) \sim 1 + \ttt{parc(125)}\cos^2\theta$
+when $\ttt{mstc(126)}>0$.
+
 \itemt{parc(126):} (D=1.0 fm/c) minium of collision time search
  This is necessary for the option $\ttt{mstc(127)}$.
 
@@ -3540,6 +3584,8 @@ $B^{1/4}=235$ MeV.
              above which a cluster cannot be formed for deuteron formation.
 \itemt{parc(152) :} (D=0.3 GeV/$c$) critical separation of two-baryons
  for deuteron formation.
+\itemt{parc(153) :} (D=1.71 fm) deuteron coalecence parameter 
+when $\ttt{mstc(158)}\geq3$.
 
 \itemt{parc(164) :} (D=0.0) transverse radius for \ttt{mstc(164)}=4
 \itemt{parc(165) :} (D=0.0) longituinal distance $z$ for \ttt{mstc(164)}=4
