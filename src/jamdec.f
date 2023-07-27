@@ -217,6 +217,14 @@ c         iswang=mstc(60)
           itwang=mstc(61)
           if(k(1,ip).eq.2.and.kq(1,ip).eq.999999) then  ! resonance
             iang=2                                      ! anisotropic
+
+            ! p-wave angular distribution for delta decay.
+            if(mstc(126).ge.1) then
+              if(id0.eq.id_delt.and.emd.gt.1.1d0) then
+                if(mstc(61).ne.0) itwang=5
+              endif
+            endif
+
           else if(kq(1,ip).eq.888888) then
             iang=1                                      ! anisotropic
           endif
@@ -1289,6 +1297,7 @@ c***********************************************************************
 
       subroutine jamdecang(iswang1,ptx0,utrat,pr,pt,prz)
       implicit double precision(a-h, o-z)
+      include 'jam2.inc'
 
 c...[ iswang1=5
         if(iswang1.eq.5) then   ! fixed L(=1) resonance decay
@@ -1296,7 +1305,7 @@ c...[ iswang1=5
    30    cos1=-1d0+2d0*rn(0)
          itry=itry+1
          if(itry.le.200) then
-           if(rn(0).gt.(1d0+cos1**2)/2d0) goto 30
+           if(rn(0).gt.(1d0+parc(125)*cos1**2)/(1d0+parc(125))) goto 30
          else
            call jamerrm(1,0,'(jamrdec:)delta(1232)itry>200')
          endif

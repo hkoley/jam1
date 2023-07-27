@@ -1,6 +1,7 @@
-#AC_INIT(src/grv98.f)
+#AC_INIT
+AC_CONFIG_SRCDIR([src/grv98.f])
 #AM_INIT_AUTOMAKE(pdflib,1.10)
-AC_INIT(jam,1.9093)
+AC_INIT([jam],[1.9094])
 AC_PREFIX_DEFAULT($HOME)
 AM_INIT_AUTOMAKE(dist-bzip2)
 AC_PREFIX_DEFAULT($HOME)
@@ -82,4 +83,5 @@ AM_CONDITIONAL(_CUDA, test x$with_cuda = xtrue)
 
 
 
-AC_OUTPUT(Makefile src/Makefile main/Makefile)
+AC_CONFIG_FILES([Makefile src/Makefile main/Makefile])
+AC_OUTPUT

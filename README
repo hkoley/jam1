@@ -2,7 +2,7 @@
            JAM (Jet AA Microscopic transport Model)
            This is JAM version 1.000  by Yasushi Nara
 
-   Many interesting phyiscs are jammed in heavy ion collisions.
+   Many interesting physics are jammed in heavy ion collisions.
    I hope you have a real jam with JAM.
 
     Last visited  6 Jul. 1997
@@ -12,9 +12,11 @@
     Last visited  6 May  1998   version 0.0087a
     Last visited 28 Jul. 1998   version 0.0090a
 
+  Old versions JAM can be found in https://github.com/ynara305/jam1past
+
   Manual 'jam.tex' can be found in directory tex for great detail.
 
- o Program useage of JAM is very similar to PYTHIA,FRITIOF,HIJING,VNI
+ o Program usage of JAM is very similar to PYTHIA,FRITIOF,HIJING,VNI
  o Particle ID is the same as PDG ID.
 
 
@@ -26,7 +28,7 @@
  How to input to run.
  This is a example for input file.
 
-(1) event=100             <-- Total number of siumulation run
+(1) event=100             <-- Total number of simulation run
 (2) proj=27Si             <-- proj. type
 (3) targ=28Al             <-- Targ. type
 (4) win=10.0GeV           <-- Incident energy(momentum) in GeV(GeV/c).
@@ -42,18 +44,18 @@
 Note:
 (2)(3) proj, targ:
      For the projectile type, p, p~, n, n~, pi+,pi0,pi-,k-,k+...
-     are avaiable. 
+     are available. 
      If proj=non, we can check the ground state properties of
      nucleus with target nucleus.
      targ=100:50  : mass number 100 and 50 neutrons
 
-(4) win: incident energy.  Avaiable Units are gev,gevc,mev or mevc.
+(4) win: incident energy.  Available Units are gev,gevc,mev or mevc.
 
      (^_^) If you want to enter momentum,
-             put for exapmele win=1.0gevc or win=1.0mevc.
+             put for example win=1.0gevc or win=1.0mevc.
      (^_^) If you chose optin frame=collider,
            the meaning of incident energy becomes c.m. energy/nucleon.
-(5) frame: Avaiable frame (comp. frame) is
+(5) frame: Available frame (comp. frame) is
         frame=nn         NN center of mass frame
         frame=cm         Total center of mass frame
         frame=lab        Lab. frame.
@@ -74,7 +76,7 @@ Note:
       put, for example, mstc(65)= 2.
       '#' or '!' can be used to comment.
       Blank line is also possible.
-(9)  'fname()' can be changed. 2,3,5,6,7,8 can be avaliable.
+(9)  'fname()' can be changed. 2,3,5,6,7,8 can be available.
 (10) Input file should be ended by 'end' command.
 
   See the example input file 'jam.cfg'.

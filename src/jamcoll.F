@@ -6924,8 +6924,8 @@ c..mcoal=5 and 8 seems to be good( give almost same results)
 c..****************
 c..need to multiply weid(i) on multiplicity of deuteron
 c..****************
-      data mcoal/5/
-
+c     data mcoal/5/
+      mcoal=mstc(158)
       mstd(65)=mstd(65)+1
       nclust=0
 
@@ -6934,7 +6934,8 @@ c...Define cluster distance.
         rcc2=parc(151)**2
         pcc2=parc(152)**2
       else
-        wdeut=1.71d0
+        wdeut=parc(153)
+c       wdeut=1.71d0
 c       wdeut=1.76d0
 c       wdeut=1.56d0
       endif
