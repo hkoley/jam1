@@ -7220,6 +7220,18 @@ c       b2=(r(1,jp)-r(1,jt))**2+(r(2,jp)-r(2,jt))**2
         return
       endif
 
+c...Save the position to JAMRUN.DAT
+      if(mstc(94)==1) then
+      do jt = 1, mstd(2) + mstd(5)
+        if(kq(2,jt) .ne.1) cycle ! skip spectator
+        if(jt.le.mstd(5)) then
+          write(mstc(37), '(2I8,3F12.6)')1,jt,r(1,jt),r(2,jt),r(3,jt)
+        else
+          write(mstc(37), '(2I8,3F12.6)')2,jt,r(1,jt),r(2,jt),r(3,jt)
+        endif
+      end do 
+      endif
+
 c...Save predicted initial collision number and participants.
         mstd(79)=mentry
         mstd(80)=0

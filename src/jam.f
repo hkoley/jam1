@@ -3355,6 +3355,7 @@ c...Modify for box.
       include 'jam4.inc'
 c     dimension rhon(600)
 c     dimension rhon(6000)  ! 10 test particle 
+      integer ideform(2)
 
 c...Set total particle number.
       nv=(mstd(2)+mstd(5))*mstc(5)
@@ -3393,6 +3394,10 @@ c...Min. distance between nucl.s
 
       fac=(2.d0*paru(1)*parc(15))**1.5d0 !    [(2*pi*L)^3/2]
       facp=(4.d0*paru(1)*parc(15))**1.5d0 !    [(4*pi*L)^3/2]
+
+c...Orientation of deformed nuclei.
+      ideform(1)=mstc(93)
+      ideform(2)=mstc(92)
 
 c....Loop over proj. and targ. in=1:targ. in=2:proj.
       do 1000 in=1,2
@@ -3506,7 +3511,7 @@ c...Hard sphere.
           r(3,i)=rr*cx
 c...take into account deformation of nucleus 2013/1/16
         else 
-          call jamdefrm(mstd(3*in-1), r(1,i),r(2,i),r(3,i))
+          call jamdefrm(mstd(3*in-1),ideform(in), r(1,i),r(2,i),r(3,i))
         endif
 
 c...Box by maru: Distribute in a box or sphere.
@@ -4037,7 +4042,7 @@ c     end do
 
 c***********************************************************************
 
-      subroutine jamdefrm(ia,x,y,z)
+      subroutine jamdefrm(ia,iopt,x,y,z)
 c...Purpose: to sample nucleon position for deformed nucleus
 c...taken from the code originally written by T. Hirano in 2010
 c...see for example, P. Filip, R. Lednicky, H. Masui, and N. Xu,
@@ -4111,9 +4116,32 @@ c...Spherical Harmonics Y^0_4
       z = r*cx
   
 c...Rotate a deformed nucleus randomly
-      ctr = 1.0-2.0*rn(0)
-      str = sqrt(1.0-ctr*ctr)
-      phi=2*paru(1)*rn(0)
+      if(iopt==0) then
+        ctr = 1.0-2.0*rn(0)
+        str = sqrt(1.0-ctr*ctr)
+        phi=2*paru(1)*rn(0)
+
+c...tip-tip  Rz(0-2pi)Ry(0)
+      else if(iopt==1) then
+        ctr=1.0
+        str=0.0
+        phi=2*paru(1)*rn(0)
+
+c...body-body Ry(pi/2)
+      else if(iopt==2) then
+        ctr=0.0
+        str=1.0
+        phi=0.0
+
+c....side-side Rz(pi/2)*Ry(pi/2)
+      else if(iopt==3) then
+        ctr=0.0
+        str=1.0
+        phi=0.5*paru(1)
+      else
+        write(6,*)'jamdefrm2:wrong iopt=',iopt
+        return
+      endif
 
       rot(1,1)=ctr*cos(phi)
       rot(1,2)=-sin(phi)
