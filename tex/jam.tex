@@ -2993,13 +2993,18 @@ than the value given by \ttt{parc(133)}. The binding enegy is estimated by
 the Bethe and Weizs\"acker mass formula.
  \end{subentry}
 
+\itemt{mstc(134) :}(D=0) 
+ \begin{subentry}
+    \itemt{$=0$ :} initial orientation of the impact parameter is only $x$-axis.
+    \itemt{$=1$ :} impact parameter is randomly distributed both in $x$ and $y$-axis.
+ \end{subentry}
+
 \itemt{mstc(135) :}(D=0) 
  \begin{subentry}
     \itemt{$=0$ :} Full calculation.
     \itemt{$=1$ :} linear interpolation to compute momentum dependent
 potential at the Cooper-Frye formula.
  \end{subentry}
-
 
 \itemt{mstc(136) :}(D=0) order time in the  hydro evolution.
 
@@ -3811,6 +3816,10 @@ $=\ttt{mstd(23)}\ttt{parc(2)}$.
 \itemt{pard(54) :} maximum c.m. distance  for $MB$ collision.
 \itemt{pard(55) :} maximum c.m. distance  for $MM$ collision.
 \itemt{pard(56) :} maximum c.m. distance  for $\Bbar B$ collision.
+
+\itemt{pard(57) :} $\phi$ angle in the impact parameter:
+$(b_x,b_y)=(b\cos\phi,b\sin\phi)$
+to specify reaction plane see \ttt{mstc(134)}
 
 
 %See mstc(31)-mstc(38).
