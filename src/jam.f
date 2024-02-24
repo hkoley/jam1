@@ -968,11 +968,25 @@ c...b^2 distribution.
 
       if(pard(2).lt.0.0d0) pard(2)=0.0d0
       if(mod(mstd(21),mstd(24)).eq.0) pard(3)=pard(3)+pard(4)
+
       pard(37)=pard(2)/2
       pard(47)=-pard(2)/2
       if(mstc(4)==0) then
         pard(37)=pard(2)
         pard(47)=0.0
+      endif
+
+      pard(57)=0.0
+      if(mstc(134).eq.1) then
+        pard(57)=paru(2)*rn(0)
+        bx=cos(pard(57))
+        by=sin(pard(57))
+        b=pard(47)
+        pard(47)=b*bx
+        pard(48)=b*by
+        b=pard(37)
+        pard(37)=b*bx
+        pard(38)=b*by
       endif
 
 c...Determine initial condition of the JAM simulation.
@@ -3255,22 +3269,12 @@ c...simulation in the lab. frame
         rzt=0.0
       endif
 
-      pard(57)=0.0
-      if(mstc(134).eq.1) pard(57)=paru(2)*rn(0)
-
       do i=1,nv
  
 c....Target.
         if(i.le.mstd(5)*mstc(5)) then
           rxb=pard(47)
-          ryb=0.0
-          pard(57)=0.0
-          if(mstc(134).eq.1) then
-            rxb=pard(47)*cos(pard(57))
-            ryb=pard(47)*sin(pard(57))
-            pard(47)=rxb
-            pard(48)=ryb
-          endif
+          ryb=pard(48)
 c         rzb=pard(49) - rzt
           rzb=rzt
           pxb=pard(41)
@@ -3281,13 +3285,7 @@ c         rzb=pard(49) - rzt
 c.....Projectile.
         else
           rxb=pard(37) !x
-          ryb=0.0
-          if(mstc(134).eq.1) then
-            rxb=pard(37)*cos(pard(57))
-            ryb=pard(37)*sin(pard(57))
-            pard(37)=rxb
-            pard(38)=ryb
-          endif
+          ryb=pard(38)
 c         rzb=pard(39) - rzp !z
           rzb=rzp !z
           pxb=pard(31) !px
