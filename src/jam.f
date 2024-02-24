@@ -3255,6 +3255,8 @@ c...simulation in the lab. frame
         rzt=0.0
       endif
 
+      pard(57)=0.0
+      if(mstc(134).eq.1) pard(57)=paru(2)*rn(0)
 
       do i=1,nv
  
@@ -3264,7 +3266,6 @@ c....Target.
           ryb=0.0
           pard(57)=0.0
           if(mstc(134).eq.1) then
-            pard(57)=paru(2)*rn(0)
             rxb=pard(47)*cos(pard(57))
             ryb=pard(47)*sin(pard(57))
             pard(47)=rxb
@@ -3281,9 +3282,7 @@ c.....Projectile.
         else
           rxb=pard(37) !x
           ryb=0.0
-          pard(57)=0.0
           if(mstc(134).eq.1) then
-            pard(57)=paru(2)*rn(0)
             rxb=pard(37)*cos(pard(57))
             ryb=pard(37)*sin(pard(57))
             pard(37)=rxb
