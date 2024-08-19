@@ -3554,13 +3554,18 @@ c...Box by maru: Distribute in a box or sphere.
            k(4,i)=0
         else
 
+c...first set proton
          k(2,i)=2212
-         if(int(rn(0)*(npro+nneu)).ge.npro) k(2,i)=2112
+         p(5,i)=parc(25)
+c...randomly select neutron
+         if(int(rn(0)*(npro+nneu)).ge.npro) then
+           k(2,i)=2112
+           p(5,i)=parc(24)
+         endif
          k(3,i)=0
          k(4,i)=0
          k(8,i)=ksimul
          k(9,i)=3
-         p(5,i)=parc(24)
 
         endif
 

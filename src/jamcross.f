@@ -2203,7 +2203,8 @@ c...k0n
       data (kfkp(4,i),i=1,2)/-311,2112/
       parameter(emkc=.49360d0, emk0=.49770d0,emk=.495650d0,widk=0.05d0)
       parameter(empion=0.139d0,emdelt=1.232d0,widdlt=0.12d0)
-      parameter(emp=.93830d0 ,emn=.93960d0,emnuc=0.93895d0)
+c     parameter(emp=.93830d0 ,emn=.93960d0,emnuc=0.93895d0)
+      parameter(emp=.938270d0 ,emn=.939570d0,emnuc=0.93895d0)
       integer iabsorb
 
 c....Collision of hadrons within a formation time cannot be absorbed.
@@ -2560,7 +2561,8 @@ c...msel=3: Monte Carlo evaluation of inelastic channel.
       real*8 jamchc96,jamrgg96
       parameter(emkc=.49360d0, emk0=.49770d0,emk=.495650d0,widk=0.05d0)
       parameter(empion=0.139d0,emdelt=1.232d0,widdlt=0.12d0)
-      parameter(emp=.93830d0 ,emn=.93960d0,emnuc=0.93895d0)
+c     parameter(emp=.93830d0 ,emn=.93960d0,emnuc=0.93895d0)
+      parameter(emp=.938270d0 ,emn=.939570d0,emnuc=0.93895d0)
       parameter(ekinmi=0.001d0,emdmin=1.082d0)
       parameter (bhad=2.3d0,eps=0.0808d0,facel=0.0511d0)
       dimension sigin(mxchan)
@@ -3966,10 +3968,10 @@ c....Nucleon
          iexc1=0
          if(iz1.eq.0) then
            kf1=2112
-           em1min=0.9396d0
+           em1min=0.93957d0
          else if(iz1.eq.1) then
            kf1=2212
-           em1min=0.9383d0
+           em1min=0.93827d0
          endif
          kc1=jamcomp(kf1)
 c...Delta(1232)
@@ -4016,10 +4018,10 @@ c....Nucleon
          iexc2=0
          if(iz2.eq.0) then
            kf2=2112
-           em2min=0.9396d0
+           em2min=0.93957d0
          else if(iz2.eq.1) then
            kf2=2212
-           em2min=0.9383d0
+           em2min=0.93827d0
          endif
          kc2=jamcomp(kf2)
 
@@ -6038,7 +6040,7 @@ c     parameter (sigmax=60.0d0)
       parameter (sigmax=1000.0d0)
       parameter(emkc=.49360d0, emk0=.49770d0,emk=.495650d0,widk=0.05d0)
       parameter(empion=0.139d0,emdelt=1.232d0,widdlt=0.12d0)
-      parameter(emp=.93830d0 ,emn=.93960d0,emnuc=0.93895d0)
+      parameter(emp=.93827d0 ,emn=.93957d0,emnuc=0.93895d0)
 
       sig=0.0d0
       sigel=0.0d0
